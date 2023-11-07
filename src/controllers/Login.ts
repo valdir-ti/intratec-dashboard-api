@@ -24,7 +24,7 @@ export const Login = async (req: Request, res: Response) => {
             })
         }        
         
-        const token = jwt.sign({_id: dbUser._id, name: dbUser.name }, process.env.JWT_LOGIN_TOKEN || "", { expiresIn: "1D" })
+        const token = jwt.sign({_id: dbUser._id, name: dbUser.name, email: dbUser.email }, process.env.JWT_LOGIN_TOKEN || "", { expiresIn: "1D" })
         return res.status(200).json({
                 message: 'Login Successful',
                 token
