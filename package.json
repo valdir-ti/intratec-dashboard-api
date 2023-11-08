@@ -7,7 +7,8 @@
     "dev": "npx nodemon src/server.ts --watch 'src/' -e ts",
     "start": "node ./dist/server.js",
     "compile": "npx tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "vercel-build": "echo hello"
   },
   "keywords": [],
   "author": "",
