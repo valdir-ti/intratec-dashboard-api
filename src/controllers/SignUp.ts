@@ -8,6 +8,13 @@ const saltRounds = 10
 const validateSignUpData = async(req: Request, res: Response) => {
     const { name, email, password } = req.body
 
+    if(!name || !email || !password) {
+        res.status(400).json({
+            message: "All fields are required"
+        })
+        return false
+    }
+
     if(name.trim().length === 0) {
         res.status(400).json({
             message: "Please enter a name"
