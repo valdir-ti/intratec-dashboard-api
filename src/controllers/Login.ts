@@ -18,6 +18,8 @@ export const Login = async (req: Request, res: Response) => {
     if(dbUser) {
         const match = await bcrypt.compare(password, dbUser.password)
 
+        const { _id, name, email } = dbUser
+
         if(!match) {
            return res.status(400).json({
                 message: 'Username or password is incorrect',
@@ -25,8 +27,10 @@ export const Login = async (req: Request, res: Response) => {
         }        
         
         const token = jwt.sign({_id: dbUser._id, name: dbUser.name, email: dbUser.email }, process.env.JWT_LOGIN_TOKEN || "", { expiresIn: "1D" })
+
         return res.status(200).json({
                 message: 'Login Successful',
+                user: { _id, name, email },
                 token
         })
     }
