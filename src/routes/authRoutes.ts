@@ -9,8 +9,8 @@ import { UserSingle } from '../controllers/UserSingle'
 
 const router = Router()
 
-router.get("/users/:id", UserSingle)
 router.get("/users", UsersList)
+router.get("/users/:id", UserSingle)
 router.get("/products", ProductsList)
 router.post("/signup", SignUp)
 router.post("/login", Login)
