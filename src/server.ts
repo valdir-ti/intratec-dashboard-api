@@ -12,19 +12,19 @@ app.use(cors())
 app.use(express.json())
 
 try {
-    mongoose.connect(process.env.MONGODB_LINK || "")
-    console.log('MongoDB connected');
+	mongoose.connect(process.env.MONGODB_LINK || '')
+	console.log('MongoDB connected')
 } catch (error) {
-    console.log('MongoDB error connection => ', error);
+	console.log('MongoDB error connection => ', error)
 }
 
-app.use("/api", routes)
-app.use("/", (req: Request, res: Response) => {
-    res.status(200).json({message: "server is running"})
+app.use('/api', routes)
+app.use('/', (req: Request, res: Response) => {
+	res.status(200).json({ message: 'server is running' })
 })
 
 app.listen(PORT, () => {
-    console.log(`App listenning at ${PORT}`);
+	console.log(`App listenning at ${PORT}`)
 })
 
 export default app
