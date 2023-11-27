@@ -2,8 +2,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt'
 import isEmail from 'validator'
 import User from '../models/User'
-
-const saltRounds = 10
+import { saltRounds } from '../utils/saltRounds';
 
 const validateSignUpData = async(req: Request, res: Response) => {
     const { name, email, password } = req.body
