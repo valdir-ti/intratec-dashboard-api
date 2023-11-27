@@ -1,16 +1,18 @@
 import { Router } from 'express'
 
-import { SignUp } from "../controllers/SignUp"
-import { Login } from "../controllers/Login"
 import { Auth } from "../controllers/Auth"
+import { Login } from "../controllers/Login"
+import { SignUp } from "../controllers/SignUp"
+import { AddUser } from '../controllers/AddUser'
 import { UsersList } from '../controllers/UsersList'
-import { ProductsList } from '../controllers/ProductsList'
 import { UserSingle } from '../controllers/UserSingle'
+import { ProductsList } from '../controllers/ProductsList'
 import { ProductSingle } from '../controllers/ProductSingle'
 
 const router = Router()
 
 router.get("/users", UsersList)
+router.post("/users", AddUser)
 router.get("/users/:id", UserSingle)
 
 router.get("/products", ProductsList)

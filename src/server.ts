@@ -11,11 +11,11 @@ const PORT = process.env.PORT || 5000
 app.use(cors())
 app.use(express.json())
 
-try {   
+try {
     mongoose.connect(process.env.MONGODB_LINK || "")
-    console.log('MongoDB connected');    
+    console.log('MongoDB connected');
 } catch (error) {
-    console.log('MongoDB error connection => ', error);    
+    console.log('MongoDB error connection => ', error);
 }
 
 app.use("/api", routes)
@@ -24,7 +24,7 @@ app.use("/", (req: Request, res: Response) => {
 })
 
 app.listen(PORT, () => {
-    console.log(`App listenning at ${PORT}`);    
+    console.log(`App listenning at ${PORT}`);
 })
 
 export default app

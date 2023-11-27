@@ -4,10 +4,9 @@ import Product from '../models/Product'
 export const ProductSingle = async (req: Request, res: Response) => {
 
     const _id = req.params.id
-
-    const singleProduct = await Product.findById(_id).select('title description price stock image size category isActive createdAt').exec()
-
+    
     try {
+        const singleProduct = await Product.findById(_id).select('title description price stock image size category isActive createdAt').exec()
         return res.status(200).json({
             message: "Single product get successfully",
             data: singleProduct
