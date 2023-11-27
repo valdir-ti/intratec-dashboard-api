@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express'
+import express, { Response } from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import 'dotenv/config'
@@ -19,7 +19,7 @@ try {
 }
 
 app.use('/api', routes)
-app.use('/', (req: Request, res: Response) => {
+app.use('/', (_, res: Response) => {
 	res.status(200).json({ message: 'server is running' })
 })
 
