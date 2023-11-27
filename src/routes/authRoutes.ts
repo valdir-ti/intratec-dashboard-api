@@ -8,8 +8,18 @@ import { UsersList } from '../controllers/UsersList'
 import { UserSingle } from '../controllers/UserSingle'
 import { ProductsList } from '../controllers/ProductsList'
 import { ProductSingle } from '../controllers/ProductSingle'
+import { GetUsersController } from '../controllers/get-user/get-users'
+import { MongoGetUsersRepository } from '../repositories/get-users/mongo-get-users'
 
 const router = Router()
+
+router.get('/users-test', async (req, res) => {
+	const mongoGetUsersRepository = new MongoGetUsersRepository()
+	const getUsersController = new GetUsersController(mongoGetUsersRepository)
+
+	const { body, statusCode } = await getUsersController.handle()
+	res.send(body).status(statusCode)
+})
 
 router.get('/users', UsersList)
 router.post('/users', AddUser)
