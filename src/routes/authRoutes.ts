@@ -4,7 +4,6 @@ import { Auth } from '../controllers/Auth'
 import { Login } from '../controllers/Login'
 import { SignUp } from '../controllers/SignUp'
 import { AddUser } from '../controllers/AddUser'
-import { UsersList } from '../controllers/UsersList'
 import { UserSingle } from '../controllers/UserSingle'
 import { ProductsList } from '../controllers/ProductsList'
 import { ProductSingle } from '../controllers/ProductSingle'
@@ -13,7 +12,7 @@ import { MongoGetUsersRepository } from '../repositories/get-users/mongo-get-use
 
 const router = Router()
 
-router.get('/users-test', async (req, res) => {
+router.get('/users', async (req, res) => {
 	const mongoGetUsersRepository = new MongoGetUsersRepository()
 	const getUsersController = new GetUsersController(mongoGetUsersRepository)
 
@@ -21,7 +20,6 @@ router.get('/users-test', async (req, res) => {
 	res.send(body).status(statusCode)
 })
 
-router.get('/users', UsersList)
 router.post('/users', AddUser)
 router.get('/users/:id', UserSingle)
 
