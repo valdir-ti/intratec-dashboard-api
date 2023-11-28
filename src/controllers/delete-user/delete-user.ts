@@ -1,12 +1,8 @@
 import { IUser } from '../../models/interfaces/IUser'
-import { HttpRequest, HttpResponse } from '../protocols'
-import {
-	DeleteUserParam,
-	IDeleteUserController,
-	IDeleteUserRepository,
-} from './protocols'
+import { HttpRequest, HttpResponse, IController } from '../protocols'
+import { DeleteUserParam, IDeleteUserRepository } from './protocols'
 
-export class DeleteUserController implements IDeleteUserController {
+export class DeleteUserController implements IController {
 	constructor(private readonly deleteUserRepository: IDeleteUserRepository) {}
 
 	async handle(
