@@ -1,7 +1,8 @@
 import mongoose from 'mongoose'
 import isEmail from 'validator/lib/isEmail'
+import { IUser } from '../interfaces/IUser'
 
-const userSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema<IUser>(
 	{
 		name: {
 			type: String,
@@ -19,6 +20,14 @@ const userSchema = new mongoose.Schema(
 			required: [true, 'Please enter a password'],
 			minLength: [6, 'Minimum password length is 6'],
 		},
+		phone: {
+			type: String,
+			require: false,
+		},
+		address: {
+			type: String,
+			require: false,
+		},
 		isAdmin: {
 			type: Boolean,
 			default: false,
@@ -29,6 +38,7 @@ const userSchema = new mongoose.Schema(
 		},
 		image: {
 			type: String,
+			require: false,
 		},
 	},
 	{

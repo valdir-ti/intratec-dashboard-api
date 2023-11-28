@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
 import isEmail from 'validator'
-import User from '../models/User'
+import User from '../models/mongo/User'
 import { saltRounds } from '../utils/saltRounds'
 
 const validateSignUpData = async (req: Request, res: Response) => {

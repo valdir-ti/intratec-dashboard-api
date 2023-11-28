@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import User from '../models/User'
+import User from '../models/mongo/User'
 
 export const UserSingle = async (req: Request, res: Response) => {
 	const _id = req.params.id

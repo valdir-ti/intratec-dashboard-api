@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import User from '../models/User'
+import User from '../models/mongo/User'
 import { Request, Response } from 'express'
 
 export const Login = async (req: Request, res: Response) => {
@@ -15,7 +15,7 @@ export const Login = async (req: Request, res: Response) => {
 	const dbUser = await User.findOne({ email }).exec()
 
 	if (dbUser) {
-		const match = await bcrypt.compare(password, dbUser.password)
+		const match = await bcrypt.compare(password, dbUser.password || '')
 
 		const { _id, name, email } = dbUser
 

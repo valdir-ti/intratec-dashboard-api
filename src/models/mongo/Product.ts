@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
+import { IProduct } from '../interfaces/IProduct'
 
-const productSchema = new mongoose.Schema(
+const productSchema = new mongoose.Schema<IProduct>(
 	{
 		title: {
 			type: String,
@@ -15,7 +16,7 @@ const productSchema = new mongoose.Schema(
 		stock: {
 			type: Number,
 		},
-		cateogry: {
+		category: {
 			type: String,
 		},
 		isActive: {
