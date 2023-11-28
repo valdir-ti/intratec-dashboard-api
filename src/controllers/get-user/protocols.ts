@@ -1,4 +1,4 @@
-import { IUser } from 'src/models/iuser'
+import { IUser } from '../../models/interfaces/IUser'
 import { HttpResponse } from '../protocols'
 
 export interface IGetUsersController {

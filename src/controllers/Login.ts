@@ -15,7 +15,7 @@ export const Login = async (req: Request, res: Response) => {
 	const dbUser = await User.findOne({ email }).exec()
 
 	if (dbUser) {
-		const match = await bcrypt.compare(password, dbUser.password)
+		const match = await bcrypt.compare(password, dbUser.password || '')
 
 		const { _id, name, email } = dbUser
 
