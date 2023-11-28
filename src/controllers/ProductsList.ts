@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import User from '../models/Product'
+import User from '../models/mongo/Product'
 
 export const ProductsList = async (req: Request, res: Response) => {
 	const productsList = await User.find()

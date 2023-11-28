@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import Product from '../models/Product'
+import Product from '../models/mongo/Product'
 
 export const ProductSingle = async (req: Request, res: Response) => {
 	const _id = req.params.id

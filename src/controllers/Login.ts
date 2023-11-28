@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import User from '../models/User'
+import User from '../models/mongo/User'
 import { Request, Response } from 'express'
 
 export const Login = async (req: Request, res: Response) => {

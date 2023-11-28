@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import isEmail from 'validator/lib/isEmail'
-import { IUser } from './iuser'
+import { IUser } from '../interfaces/IUser'
 
 const userSchema = new mongoose.Schema<IUser>(
 	{
