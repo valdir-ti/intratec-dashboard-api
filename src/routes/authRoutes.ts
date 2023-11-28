@@ -3,12 +3,13 @@ import { Router } from 'express'
 import { Auth } from '../controllers/Auth'
 import { Login } from '../controllers/Login'
 import { SignUp } from '../controllers/SignUp'
-import { AddUser } from '../controllers/AddUser'
 import { UserSingle } from '../controllers/UserSingle'
 import { ProductsList } from '../controllers/ProductsList'
 import { ProductSingle } from '../controllers/ProductSingle'
 import { GetUsersController } from '../controllers/get-user/get-users'
 import { MongoGetUsersRepository } from '../repositories/get-users/mongo-get-users'
+import { CreateUserController } from '../controllers/create-user/create-user'
+import { MongoCreateUserRepository } from '../repositories/create-user/mongo-create-user'
 
 const router = Router()
 
@@ -17,10 +18,22 @@ router.get('/users', async (req, res) => {
 	const getUsersController = new GetUsersController(mongoGetUsersRepository)
 
 	const { body, statusCode } = await getUsersController.handle()
-	res.send(body).status(statusCode)
+	res.json({ statusCode, data: body })
 })
 
-router.post('/users', AddUser)
+router.post('/users', async (req, res) => {
+	const mongoCreateUserRepository = new MongoCreateUserRepository()
+	const createUserController = new CreateUserController(
+		mongoCreateUserRepository,
+	)
+
+	const { body, statusCode } = await createUserController.handle({
+		body: req.body,
+	})
+
+	res.json({ statusCode, data: body })
+})
+
 router.get('/users/:id', UserSingle)
 
 router.get('/products', ProductsList)

@@ -4,11 +4,11 @@ import {
 	CreateUserParams,
 	ICreateUserRepository,
 } from 'src/controllers/create-user/protocols'
-import { IUser } from 'src/models/interfaces/IUser'
+import { IUser } from '../../models/interfaces/IUser'
 import User from '../../models/mongo/User'
-import { saltRounds } from 'src/utils/saltRounds'
+import { saltRounds } from '../../utils/saltRounds'
 
-export class MongoCreateUser implements ICreateUserRepository {
+export class MongoCreateUserRepository implements ICreateUserRepository {
 	async createUser(params: CreateUserParams): Promise<IUser> {
 		const {
 			address,
@@ -23,7 +23,7 @@ export class MongoCreateUser implements ICreateUserRepository {
 
 		const hashedPassword = await bcrypt.hash(password, saltRounds)
 
-		const user = await User.create({
+		const userCreated = await User.create({
 			address,
 			email,
 			image,
@@ -34,10 +34,12 @@ export class MongoCreateUser implements ICreateUserRepository {
 			password: hashedPassword,
 		})
 
-		if (!user) throw new Error('User not created')
+		if (!userCreated) throw new Error('User not created')
 
-		const { ...rest } = user
+		const user = (await User.findOne({ email })
+			.select('name email image isAdmin isActive createdAt')
+			.exec()) as IUser
 
-		return { password, ...rest }
+		return user
 	}
 }

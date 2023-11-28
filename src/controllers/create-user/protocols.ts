@@ -1,4 +1,11 @@
-import { IUser } from 'src/models/interfaces/IUser'
+import { IUser } from '../../models/interfaces/IUser'
+import { HttpRequest, HttpResponse } from '../protocols'
+
+export interface ICreateUserController {
+	handle(
+		httpRequest: HttpRequest<CreateUserParams>,
+	): Promise<HttpResponse<IUser>>
+}
 
 export interface CreateUserParams {
 	name: string
