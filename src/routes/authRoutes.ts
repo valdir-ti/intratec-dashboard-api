@@ -18,7 +18,7 @@ router.get('/users', async (req, res) => {
 	const getUsersController = new GetUsersController(mongoGetUsersRepository)
 
 	const { body, statusCode } = await getUsersController.handle()
-	res.json({ statusCode, data: body })
+	res.status(statusCode).json(body)
 })
 
 router.post('/users', async (req, res) => {
@@ -31,7 +31,7 @@ router.post('/users', async (req, res) => {
 		body: req.body,
 	})
 
-	res.json({ statusCode, data: body })
+	res.status(statusCode).json(body)
 })
 
 router.get('/users/:id', UserSingle)
