@@ -13,6 +13,7 @@
 	"plugins": ["@typescript-eslint"],
 	"rules": {
 		"semi": ["off", "never"],
-		"quotes": ["off", "double"]
+		"quotes": ["off", "double"],
+		"@typescript-eslint/no-explicit-any": "warn"
 	}
 }
