@@ -1,59 +1,46 @@
 import { validateUserData } from '../../utils/validate-user-data'
 import { IUser } from '../../models/interfaces/IUser'
-import { HttpRequest, HttpResponse } from '../protocols'
-import {
-	CreateUserParams,
-	ICreateUserController,
-	ICreateUserRepository,
-} from './protocols'
+import { HttpRequest, HttpResponse, IController } from '../protocols'
+import { CreateUserParams, ICreateUserRepository } from './protocols'
 import User from '../../models/mongo/User'
+import { badRequest, created, serverError } from '../helpers'
 
-export class CreateUserController implements ICreateUserController {
+export class CreateUserController implements IController {
 	constructor(private readonly createUserRepository: ICreateUserRepository) {}
 
 	async handle(
 		httpRequest: HttpRequest<CreateUserParams>,
-	): Promise<HttpResponse<IUser>> {
-		const { body } = httpRequest
+	): Promise<HttpResponse<IUser | string>> {
+		try {
+			const { body } = httpRequest
 
-		if (!body) {
-			return {
-				statusCode: 400,
-				body: 'Please specify a body',
+			if (!body) {
+				return badRequest('Please specify a body')
 			}
-		}
 
-		const isValid = await validateUserData(body)
+			const isValid = await validateUserData(body)
 
-		const { email } = body
-		const existingUser = await User.findOne({ email }).exec()
+			const { email } = body
+			const existingUser = await User.findOne({ email }).exec()
 
-		if (existingUser) {
-			return {
-				statusCode: 400,
-				body: 'User already exists',
+			if (existingUser) {
+				return badRequest('User already exists')
 			}
-		}
 
-		if (isValid.statusCode === 200) {
-			try {
-				const user = await this.createUserRepository.createUser(body)
+			if (isValid.statusCode === 200) {
+				try {
+					const user =
+						await this.createUserRepository.createUser(body)
 
-				return {
-					statusCode: 201,
-					body: user,
+					return created<IUser>(user)
+				} catch (error) {
+					return badRequest('Fails to create an user')
 				}
-			} catch (error) {
-				return {
-					statusCode: 400,
-					body: 'Fails to create a user',
-				}
+			} else {
+				return badRequest(isValid.body)
 			}
-		} else {
-			return {
-				statusCode: isValid.statusCode,
-				body: isValid.body,
-			}
+		} catch (error) {
+			return serverError()
 		}
 	}
 }

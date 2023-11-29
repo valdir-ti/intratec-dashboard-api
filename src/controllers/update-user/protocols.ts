@@ -1,5 +1,4 @@
 import { IUser } from 'src/models/interfaces/IUser'
-import { HttpRequest, HttpResponse } from '../protocols'
 
 export interface UpdateUserParams {
 	name?: string
@@ -12,11 +11,5 @@ export interface UpdateUserParams {
 }
 
 export interface IUpdateUserRepository {
-	updateUser(id: string, params: HttpRequest<any>): Promise<IUser>
-}
-
-export interface IUpdateUserController {
-	handle(
-		httpRequest: HttpRequest<UpdateUserParams>,
-	): Promise<HttpResponse<IUser>>
+	updateUser(id: string, params: UpdateUserParams): Promise<IUser>
 }

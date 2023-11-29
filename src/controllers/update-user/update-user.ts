@@ -1,31 +1,24 @@
 import { IUser } from '../../models/interfaces/IUser'
-import { HttpRequest, HttpResponse } from '../protocols'
-import {
-	IUpdateUserController,
-	IUpdateUserRepository,
-	UpdateUserParams,
-} from './protocols'
+import { badRequest, ok, serverError } from '../helpers'
+import { HttpRequest, HttpResponse, IController } from '../protocols'
+import { IUpdateUserRepository, UpdateUserParams } from './protocols'
 
-export class UpdateUserController implements IUpdateUserController {
+export class UpdateUserController implements IController {
 	constructor(private readonly updateUserRepository: IUpdateUserRepository) {}
 
-	async handle(httpRequest: HttpRequest<any>): Promise<HttpResponse<IUser>> {
+	async handle(
+		httpRequest: HttpRequest<UpdateUserParams>,
+	): Promise<HttpResponse<IUser | string>> {
 		try {
 			const id = httpRequest.params?.id
 			const body = httpRequest.body
 
-			if (!id) {
-				return {
-					statusCode: 400,
-					body: 'Please specify an id',
-				}
+			if (!body) {
+				return badRequest('Please specify a body')
 			}
 
-			if (!body) {
-				return {
-					statusCode: 400,
-					body: 'Please specify a body',
-				}
+			if (!id) {
+				return badRequest('Please specify an id')
 			}
 
 			const allowedFields: (keyof UpdateUserParams)[] = [
@@ -42,23 +35,14 @@ export class UpdateUserController implements IUpdateUserController {
 			)
 
 			if (someFieldsNotAllowedUpdate) {
-				return {
-					statusCode: 400,
-					body: 'Some received field is not allowed',
-				}
+				return badRequest('Some received field is not allowed')
 			}
 
 			const user = await this.updateUserRepository.updateUser(id, body)
 
-			return {
-				statusCode: 200,
-				body: user,
-			}
+			return ok<IUser>(user)
 		} catch (error) {
-			return {
-				statusCode: 500,
-				body: 'Fails to update a user',
-			}
+			return serverError()
 		}
 	}
 }
