@@ -3,7 +3,9 @@ import cors from 'cors'
 import { MongoClient } from './database/mongo'
 import 'dotenv/config'
 
-import routes from './routes/authRoutes'
+import authRouter from './routes/auth'
+import usersRoute from './routes/users'
+import productsRouter from './routes/products'
 
 const main = async () => {
 	const app = express()
@@ -19,7 +21,10 @@ const main = async () => {
 		console.log('MongoDB error connection => ', error)
 	}
 
-	app.use('/api', routes)
+	app.use('/api', authRouter)
+	app.use('/api', usersRoute)
+	app.use('/api', productsRouter)
+
 	app.use('/', (_, res: Response) => {
 		res.status(200).json({ message: 'server is running' })
 	})
