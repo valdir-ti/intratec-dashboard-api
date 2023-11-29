@@ -3,7 +3,6 @@ import { Router } from 'express'
 import { Auth } from '../controllers/Auth'
 import { Login } from '../controllers/Login'
 import { SignUp } from '../controllers/SignUp'
-import { UserSingle } from '../controllers/UserSingle'
 import { ProductsList } from '../controllers/ProductsList'
 import { ProductSingle } from '../controllers/ProductSingle'
 import { GetUsersController } from '../controllers/get-user/get-users'
@@ -14,10 +13,23 @@ import { MongoUpdateUserRepository } from '../repositories/update-user/mongo-upd
 import { UpdateUserController } from '../controllers/update-user/update-user'
 import { MongoDeleteUserRepository } from '../repositories/delete-user/mongo-delete-user'
 import { DeleteUserController } from '../controllers/delete-user/delete-user'
+import { MongoSingleUserRepository } from '../repositories/single-user/mongo-single-user'
+import { SingleUserController } from '../controllers/single-user/single-user'
 
 const router = Router()
 
-router.get('/users/:id', UserSingle)
+router.get('/users/:id', async (req, res) => {
+	const mongoSingleUserRepository = new MongoSingleUserRepository()
+	const singleUserController = new SingleUserController(
+		mongoSingleUserRepository,
+	)
+
+	const { body, statusCode } = await singleUserController.handle({
+		params: req.params,
+	})
+
+	res.status(statusCode).json(body)
+})
 router.patch('/users/:id', async (req, res) => {
 	const mongoUpdateUserRepository = new MongoUpdateUserRepository()
 	const updateUserController = new UpdateUserController(
