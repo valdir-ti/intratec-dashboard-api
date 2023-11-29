@@ -3,7 +3,7 @@ import { IUser } from '../../models/interfaces/IUser'
 import { HttpRequest, HttpResponse, IController } from '../protocols'
 import { CreateUserParams, ICreateUserRepository } from './protocols'
 import User from '../../models/mongo/User'
-import { badRequest, created } from '../helpers'
+import { badRequest, created, serverError } from '../helpers'
 
 export class CreateUserController implements IController {
 	constructor(private readonly createUserRepository: ICreateUserRepository) {}
@@ -11,31 +11,36 @@ export class CreateUserController implements IController {
 	async handle(
 		httpRequest: HttpRequest<CreateUserParams>,
 	): Promise<HttpResponse<IUser | string>> {
-		const { body } = httpRequest
+		try {
+			const { body } = httpRequest
 
-		if (!body) {
-			return badRequest(400, 'Please specify a body')
-		}
-
-		const isValid = await validateUserData(body)
-
-		const { email } = body
-		const existingUser = await User.findOne({ email }).exec()
-
-		if (existingUser) {
-			return badRequest(400, 'User already exists')
-		}
-
-		if (isValid.statusCode === 200) {
-			try {
-				const user = await this.createUserRepository.createUser(body)
-
-				return created<IUser>(user)
-			} catch (error) {
-				return badRequest(500, 'Fails to create an user')
+			if (!body) {
+				return badRequest('Please specify a body')
 			}
-		} else {
-			return badRequest(isValid.statusCode, isValid.body)
+
+			const isValid = await validateUserData(body)
+
+			const { email } = body
+			const existingUser = await User.findOne({ email }).exec()
+
+			if (existingUser) {
+				return badRequest('User already exists')
+			}
+
+			if (isValid.statusCode === 200) {
+				try {
+					const user =
+						await this.createUserRepository.createUser(body)
+
+					return created<IUser>(user)
+				} catch (error) {
+					return badRequest('Fails to create an user')
+				}
+			} else {
+				return badRequest(isValid.body)
+			}
+		} catch (error) {
+			return serverError()
 		}
 	}
 }

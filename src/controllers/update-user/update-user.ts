@@ -1,5 +1,5 @@
 import { IUser } from '../../models/interfaces/IUser'
-import { badRequest, ok } from '../helpers'
+import { badRequest, ok, serverError } from '../helpers'
 import { HttpRequest, HttpResponse, IController } from '../protocols'
 import { IUpdateUserRepository, UpdateUserParams } from './protocols'
 
@@ -14,11 +14,11 @@ export class UpdateUserController implements IController {
 			const body = httpRequest.body
 
 			if (!body) {
-				return badRequest(400, 'Please specify a body')
+				return badRequest('Please specify a body')
 			}
 
 			if (!id) {
-				return badRequest(400, 'Please specify an id')
+				return badRequest('Please specify an id')
 			}
 
 			const allowedFields: (keyof UpdateUserParams)[] = [
@@ -35,14 +35,14 @@ export class UpdateUserController implements IController {
 			)
 
 			if (someFieldsNotAllowedUpdate) {
-				return badRequest(400, 'Some received field is not allowed')
+				return badRequest('Some received field is not allowed')
 			}
 
 			const user = await this.updateUserRepository.updateUser(id, body)
 
 			return ok<IUser>(user)
 		} catch (error) {
-			return badRequest(400, 'Fails to update a user')
+			return serverError()
 		}
 	}
 }
