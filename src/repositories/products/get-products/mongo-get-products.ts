@@ -6,7 +6,7 @@ export class MongoGetProductsRepository implements IGetProductsRepository {
 	async getProducts(): Promise<IProduct[]> {
 		const products = await Product.find()
 			.select(
-				'title description price stock category image size isActive',
+				'title description price stock category image size isActive createdAt',
 			)
 			.exec()
 
