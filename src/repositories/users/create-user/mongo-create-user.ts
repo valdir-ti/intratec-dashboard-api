@@ -3,10 +3,10 @@ import bcrypt from 'bcrypt'
 import {
 	CreateUserParams,
 	ICreateUserRepository,
-} from '../../controllers/users/create-user/protocols'
-import { IUser } from '../../models/interfaces/IUser'
-import User from '../../models/mongo/User'
-import { saltRounds } from '../../utils/saltRounds'
+} from '../../../controllers/users/create-user/protocols'
+import { IUser } from '../../../models/interfaces/IUser'
+import User from '../../../models/mongo/User'
+import { saltRounds } from '../../../utils/saltRounds'
 
 export class MongoCreateUserRepository implements ICreateUserRepository {
 	async createUser(params: CreateUserParams): Promise<IUser> {

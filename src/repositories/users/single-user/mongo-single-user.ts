@@ -1,6 +1,6 @@
-import User from '../../models/mongo/User'
-import { ISingleUserRepository } from '../../controllers/users/single-user/protocols'
-import { IUser } from '../../models/interfaces/IUser'
+import User from '../../../models/mongo/User'
+import { ISingleUserRepository } from '../../../controllers/users/single-user/protocols'
+import { IUser } from '../../../models/interfaces/IUser'
 
 export class MongoSingleUserRepository implements ISingleUserRepository {
 	async singleUser(id: string): Promise<IUser> {
