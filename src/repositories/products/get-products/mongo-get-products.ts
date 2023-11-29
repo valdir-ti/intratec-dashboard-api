@@ -1,6 +1,6 @@
-import Product from '../../models/mongo/Product'
-import { IGetProductsRepository } from '../../controllers/products/protocols'
-import { IProduct } from '../../models/interfaces/IProduct'
+import Product from '../../../models/mongo/Product'
+import { IGetProductsRepository } from '../../../controllers/products/get-products/protocols'
+import { IProduct } from '../../../models/interfaces/IProduct'
 
 export class MongoGetProductsRepository implements IGetProductsRepository {
 	async getProducts(): Promise<IProduct[]> {
