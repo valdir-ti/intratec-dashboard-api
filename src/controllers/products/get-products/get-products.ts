@@ -1,19 +1,14 @@
-import { IProduct } from 'src/models/interfaces/IProduct'
-import { HttpResponse, IController } from '../../protocols'
-import { IGetProductsRepository } from './protocols'
-import { ok, serverError } from '../../helpers'
+import { Request, Response } from 'express'
+import { MongoGetProductsRepository } from '../../../repositories/products/get-products/mongo-get-products'
+import { GetProductsController } from './get-products-controller'
 
-export class GetProductsController implements IController {
-	constructor(
-		private readonly getProductsRepository: IGetProductsRepository,
-	) {}
+export const GetProducts = async (req: Request, res: Response) => {
+	const mongoGetProductsRepository = new MongoGetProductsRepository()
+	const getProductsController = new GetProductsController(
+		mongoGetProductsRepository,
+	)
 
-	async handle(): Promise<HttpResponse<IProduct[] | string>> {
-		try {
-			const products = await this.getProductsRepository.getProducts()
-			return ok<IProduct[]>(products)
-		} catch (error) {
-			return serverError()
-		}
-	}
+	const { body, statusCode } = await getProductsController.handle()
+
+	res.status(statusCode).json(body)
 }

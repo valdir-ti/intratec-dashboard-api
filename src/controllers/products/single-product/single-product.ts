@@ -1,32 +1,16 @@
-import {
-	HttpRequest,
-	HttpResponse,
-	IController,
-} from '../../../controllers/protocols'
-import { ISingleProductRepository, SingleProductParam } from './protocols'
-import { IProduct } from '../../../models/interfaces/IProduct'
-import { badRequest, serverError, ok } from '../../../controllers/helpers'
+import { Request, Response } from 'express'
+import { MongoSingleProductRepository } from '../../../repositories/products/single-product/mongo-single-product'
+import { SingleProductController } from './single-product-controller'
 
-export class SingleProductController implements IController {
-	constructor(
-		private readonly singleProductRepository: ISingleProductRepository,
-	) {}
+export const SingleProduct = async (req: Request, res: Response) => {
+	const mongoSingleProductRepository = new MongoSingleProductRepository()
+	const singleProductController = new SingleProductController(
+		mongoSingleProductRepository,
+	)
 
-	async handle(
-		httpRequest: HttpRequest<SingleProductParam>,
-	): Promise<HttpResponse<IProduct | string>> {
-		try {
-			const id = httpRequest.params?.id
+	const { body, statusCode } = await singleProductController.handle({
+		params: req.params,
+	})
 
-			if (!id) {
-				return badRequest('Please specify an id')
-			}
-
-			const product = await this.singleProductRepository.singleProduct(id)
-
-			return ok<IProduct>(product)
-		} catch (error) {
-			return serverError()
-		}
-	}
+	res.status(statusCode).json(body)
 }
