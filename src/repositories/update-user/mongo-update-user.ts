@@ -1,16 +1,12 @@
 import { IUser } from '../../models/interfaces/IUser'
 import User from '../../models/mongo/User'
-import { HttpRequest } from '../../controllers/protocols'
 import {
 	IUpdateUserRepository,
 	UpdateUserParams,
 } from '../../controllers/update-user/protocols'
 
 export class MongoUpdateUserRepository implements IUpdateUserRepository {
-	async updateUser(
-		id: string,
-		params: HttpRequest<UpdateUserParams>,
-	): Promise<IUser> {
+	async updateUser(id: string, params: UpdateUserParams): Promise<IUser> {
 		const filter = { _id: id }
 
 		const userUpdated = (await User.findOneAndUpdate(filter, params, {
