@@ -1,9 +1,9 @@
-import { validateUserData } from '../../utils/validate-user-data'
-import { IUser } from '../../models/interfaces/IUser'
-import { HttpRequest, HttpResponse, IController } from '../protocols'
+import { validateUserData } from '../../../utils/validate-user-data'
+import { IUser } from '../../../models/interfaces/IUser'
+import { HttpRequest, HttpResponse, IController } from '../../protocols'
 import { CreateUserParams, ICreateUserRepository } from './protocols'
-import User from '../../models/mongo/User'
-import { badRequest, created, serverError } from '../helpers'
+import User from '../../../models/mongo/User'
+import { badRequest, created, serverError } from '../../helpers'
 
 export class CreateUserController implements IController {
 	constructor(private readonly createUserRepository: ICreateUserRepository) {}

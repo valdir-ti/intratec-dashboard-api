@@ -1,15 +1,15 @@
 import { Router } from 'express'
 
-import { GetUsersController } from '../controllers/get-user/get-users'
+import { GetUsersController } from '../controllers/users/get-user/get-users'
 import { MongoGetUsersRepository } from '../repositories/get-users/mongo-get-users'
-import { CreateUserController } from '../controllers/create-user/create-user'
+import { CreateUserController } from '../controllers/users/create-user/create-user'
 import { MongoCreateUserRepository } from '../repositories/create-user/mongo-create-user'
 import { MongoUpdateUserRepository } from '../repositories/update-user/mongo-update-user'
-import { UpdateUserController } from '../controllers/update-user/update-user'
+import { UpdateUserController } from '../controllers/users/update-user/update-user'
 import { MongoDeleteUserRepository } from '../repositories/delete-user/mongo-delete-user'
-import { DeleteUserController } from '../controllers/delete-user/delete-user'
+import { DeleteUserController } from '../controllers/users/delete-user/delete-user'
 import { MongoSingleUserRepository } from '../repositories/single-user/mongo-single-user'
-import { SingleUserController } from '../controllers/single-user/single-user'
+import { SingleUserController } from '../controllers/users/single-user/single-user'
 
 const usersRoute = Router()
 

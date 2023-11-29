@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import {
 	CreateUserParams,
 	ICreateUserRepository,
-} from 'src/controllers/create-user/protocols'
+} from '../../controllers/users/create-user/protocols'
 import { IUser } from '../../models/interfaces/IUser'
 import User from '../../models/mongo/User'
 import { saltRounds } from '../../utils/saltRounds'

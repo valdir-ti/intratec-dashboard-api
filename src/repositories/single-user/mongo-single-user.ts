@@ -1,5 +1,5 @@
 import User from '../../models/mongo/User'
-import { ISingleUserRepository } from '../../controllers/single-user/protocols'
+import { ISingleUserRepository } from '../../controllers/users/single-user/protocols'
 import { IUser } from '../../models/interfaces/IUser'
 
 export class MongoSingleUserRepository implements ISingleUserRepository {
