@@ -1,24 +1,12 @@
 import { Router } from 'express'
-import { GetProducts } from '../controllers/products/get-products/get-products'
-import { SingleProduct } from '../controllers/products/single-product/single-product'
-import { MongoCreateProductRepository } from '../repositories/products/create-product/mongo-create-product'
-import { CreateProductController } from '../controllers/products/create-product/create-product'
+import { SingleProduct } from '../services/products/single-product'
+import { AddProduct } from '../services/products/create-product'
+import { GetProducts } from '../services/products/get-products'
 
 const productsRouter = Router()
 
 productsRouter.get('/products', GetProducts)
-productsRouter.post('/products', async (req, res) => {
-	const mongoCreateProductRepository = new MongoCreateProductRepository()
-	const createProductController = new CreateProductController(
-		mongoCreateProductRepository,
-	)
-
-	const { body, statusCode } = await createProductController.handle({
-		body: req.body,
-	})
-
-	res.status(statusCode).json(body)
-})
+productsRouter.post('/products', AddProduct)
 productsRouter.get('/products/:id', SingleProduct)
 
 export default productsRouter

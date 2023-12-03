@@ -1,7 +1,7 @@
 import { IProduct } from 'src/models/interfaces/IProduct'
 import { HttpRequest, HttpResponse, IController } from '../../protocols'
 import { CreateProductParams, ICreateProductRepository } from './protocols'
-import { badRequest, created, serverError } from '../../../controllers/helpers'
+import { badRequest, created, serverError } from '../../helpers'
 
 export class CreateProductController implements IController {
 	constructor(

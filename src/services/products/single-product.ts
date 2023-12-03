@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { MongoSingleProductRepository } from '../../../repositories/products/single-product/mongo-single-product'
-import { SingleProductController } from './single-product-controller'
+import { MongoSingleProductRepository } from '../../repositories/products/single-product/mongo-single-product'
+import { SingleProductController } from '../../controllers/products/single-product/single-product-controller'
 
 export const SingleProduct = async (req: Request, res: Response) => {
 	const mongoSingleProductRepository = new MongoSingleProductRepository()
