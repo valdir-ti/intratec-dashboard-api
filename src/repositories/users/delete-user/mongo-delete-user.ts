@@ -6,7 +6,7 @@ export class MongoDeleteUserRepository implements IDeleteUserRepository {
 	async deleteUser(id: string): Promise<IUser> {
 		const filter = { _id: id }
 		const userDeleted = (await User.findByIdAndDelete(filter).select(
-			'name email image isAdmin isActive createdAt',
+			'name createdAt',
 		)) as IUser
 
 		if (!userDeleted) throw new Error('user not deleted')
