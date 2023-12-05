@@ -1,4 +1,4 @@
-import { IUser } from 'src/models/interfaces/IUser'
+import { IUser } from '../../../models/interfaces/IUser'
 
 export interface UpdateUserParams {
 	name?: string
