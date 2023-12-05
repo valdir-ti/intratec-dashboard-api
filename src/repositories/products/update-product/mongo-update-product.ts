@@ -12,9 +12,9 @@ export class MongoUpdateProductRepository implements IUpdateProductRepository {
 	): Promise<IProduct> {
 		const filter = { _id: id }
 
-		const productUpdate = await Product.findOneAndUpdate(filter, params, {
+		const productUpdate = (await Product.findOneAndUpdate(filter, params, {
 			new: true,
-		}).select('title')
+		}).select('title')) as IProduct
 
 		if (!productUpdate) throw new Error('product not update')
 
