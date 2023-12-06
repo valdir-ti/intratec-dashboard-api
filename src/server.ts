@@ -1,7 +1,8 @@
+import 'dotenv/config'
+
 import express, { Response } from 'express'
 import cors from 'cors'
 import { MongoClient } from './database/mongo'
-import 'dotenv/config'
 
 import authRouter from './routes/auth'
 import usersRoute from './routes/users'
