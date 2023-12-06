@@ -14,12 +14,13 @@ const main = async () => {
 
 	app.use(cors())
 	app.use(express.json())
+	app.use(express.urlencoded({ extended: true }))
 
 	try {
 		await MongoClient.connect()
-		console.log('MongoDB connected')
+		console.log('😁 MongoDB connected')
 	} catch (error) {
-		console.log('MongoDB error connection => ', error)
+		console.log('😨 MongoDB error connection => ', error)
 	}
 
 	app.use('/api', authRouter)
@@ -31,7 +32,7 @@ const main = async () => {
 	})
 
 	app.listen(PORT, () => {
-		console.log(`App listenning at ${PORT}`)
+		console.log(`🚀 App listenning at ${PORT}`)
 	})
 }
 
