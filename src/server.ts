@@ -7,6 +7,7 @@ import { MongoClient } from './database/mongo'
 import authRouter from './routes/auth'
 import usersRoute from './routes/users'
 import productsRouter from './routes/products'
+import { requestInterceptor } from './utils/requestInterceptor'
 
 const main = async () => {
 	const app = express()
@@ -23,6 +24,7 @@ const main = async () => {
 		console.log('😨 MongoDB error connection => ', error)
 	}
 
+	app.all('*', requestInterceptor)
 	app.use('/api', authRouter)
 	app.use('/api', usersRoute)
 	app.use('/api', productsRouter)
