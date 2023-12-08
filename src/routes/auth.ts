@@ -1,13 +1,13 @@
 import { Router } from 'express'
 
 import { Auth } from '../controllers/Auth'
-import { Login } from '../controllers/Login'
 import { SignUp } from '../controllers/SignUp'
+import { LoginUser } from '../services/auth/login-user'
 
 const authRouter = Router()
 
+authRouter.post('/login', LoginUser)
 authRouter.post('/signup', SignUp)
-authRouter.post('/login', Login)
 authRouter.post('/auth', Auth)
 
 export default authRouter
