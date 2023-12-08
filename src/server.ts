@@ -30,7 +30,7 @@ const main = async () => {
 	app.use('/api', productsRouter)
 
 	app.use('/', (_, res: Response) => {
-		res.status(200).json({ message: 'server is running' })
+		res.status(200).json({ message: '💻 🏃 server is running' })
 	})
 
 	app.listen(PORT, () => {
