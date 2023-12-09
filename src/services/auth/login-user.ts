@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { LoginUserController } from '../../controllers/auth/login-user-controller'
-import { MongoLoginUserRepository } from '../../repositories/auth/login-user/mongo-login-user'
+import { LoginUserController } from '../../controllers/authentication/login/login-user-controller'
+import { MongoLoginUserRepository } from '../../repositories/authentication/login-user/mongo-login-user'
 
 export const LoginUser = async (req: Request, res: Response) => {
 	const mongoLoginUserRepository = new MongoLoginUserRepository()

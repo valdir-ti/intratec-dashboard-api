@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import {
 	ILoginUserRepository,
 	LoginUserParams,
-} from '../../../controllers/auth/protocols'
+} from '../../../controllers/authentication/login/protocols'
 import User from '../../../models/mongo/User'
 
 export class MongoLoginUserRepository implements ILoginUserRepository {

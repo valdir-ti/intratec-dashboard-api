@@ -1,6 +1,6 @@
-import { IUser } from '../../models/interfaces/IUser'
-import { badRequest, created, serverError } from '../helpers'
-import { HttpRequest, HttpResponse, IController } from '../protocols'
+import { IUser } from '../../../models/interfaces/IUser'
+import { badRequest, created, serverError } from '../../helpers'
+import { HttpRequest, HttpResponse, IController } from '../../protocols'
 import { ILoginUserRepository, LoginUserParams } from './protocols'
 
 export class LoginUserController implements IController {
