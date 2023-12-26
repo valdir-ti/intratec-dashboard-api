@@ -8,6 +8,7 @@ export interface UpdateUserParams {
 	image?: string
 	phone?: string
 	address?: string
+    email?: string
 }
 
 export interface IUpdateUserRepository {

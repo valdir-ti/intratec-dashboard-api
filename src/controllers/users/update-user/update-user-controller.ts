@@ -29,6 +29,7 @@ export class UpdateUserController implements IController {
 				'isActive',
 				'isAdmin',
 				'phone',
+                'email'
 			]
 			const someFieldsNotAllowedUpdate = Object.keys(body).some(
 				(key) => !allowedFields.includes(key as keyof UpdateUserParams),
