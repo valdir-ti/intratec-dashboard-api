@@ -11,7 +11,7 @@ export class MongoUpdateUserRepository implements IUpdateUserRepository {
 
 		const userUpdated = (await User.findOneAndUpdate(filter, params, {
 			new: true,
-		}).select('name email image isAdmin isActive createdAt')) as IUser
+		}).select('name email phone address image isAdmin isActive createdAt')) as IUser
 
 		if (!userUpdated) throw new Error('user not updated')
 
