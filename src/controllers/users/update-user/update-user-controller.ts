@@ -21,6 +21,10 @@ export class UpdateUserController implements IController {
 				return badRequest('Please specify an id')
 			}
 
+            if (body.email) {
+				return badRequest('Email is not allowed to edit')
+			}
+
 			const allowedFields: (keyof UpdateUserParams)[] = [
 				'name',
 				'password',
@@ -29,7 +33,6 @@ export class UpdateUserController implements IController {
 				'isActive',
 				'isAdmin',
 				'phone',
-                'email'
 			]
 			const someFieldsNotAllowedUpdate = Object.keys(body).some(
 				(key) => !allowedFields.includes(key as keyof UpdateUserParams),
