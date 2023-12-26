@@ -13,7 +13,5 @@ export const UpdateUser = async (req: Request, res: Response) => {
 		params: req.params,
 	})
 
-	console.log('on api update user => ', statusCode, body)
-
 	res.status(statusCode).json(body)
 }
