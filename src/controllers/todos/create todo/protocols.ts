@@ -1,4 +1,4 @@
-import { ITodo } from "../../models/interfaces/ITodo"
+import { ITodo } from "../../../models/interfaces/ITodo"
 
 export interface CreateTodoParams {
     description: string

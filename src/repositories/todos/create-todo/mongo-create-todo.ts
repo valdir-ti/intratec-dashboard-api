@@ -1,4 +1,4 @@
-import { CreateTodoParams, ICreateTodoRepository } from "../../../controllers/todos/protocols";
+import { CreateTodoParams, ICreateTodoRepository } from "../../../controllers/todos/create todo/protocols";
 import { ITodo } from "../../../models/interfaces/ITodo";
 import Todo from "../../../models/mongo/Todo";
 

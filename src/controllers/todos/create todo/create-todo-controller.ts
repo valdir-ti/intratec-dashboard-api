@@ -1,7 +1,7 @@
-import { ITodo } from "../../models/interfaces/ITodo";
-import { HttpRequest, HttpResponse, IController } from "../protocols";
+import { ITodo } from "../../../models/interfaces/ITodo";
+import { HttpRequest, HttpResponse, IController } from "../../protocols";
 import { CreateTodoParams, ICreateTodoRepository } from "./protocols";
-import { badRequest, created, serverError } from "../helpers";
+import { badRequest, created, serverError } from "../../helpers";
 
 export class CreateTodoController implements IController {
 

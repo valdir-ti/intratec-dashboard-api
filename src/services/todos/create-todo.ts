@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateTodoController } from "../../controllers/todos/create-todo-controller";
+import { CreateTodoController } from "../../controllers/todos/create todo/create-todo-controller";
 import { MongoCreateTodoRepository } from "../../repositories/todos/create-todo/mongo-create-todo";
 
 export const CreateTodo = async(req: Request, res: Response) => {
