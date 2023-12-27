@@ -7,6 +7,8 @@ import { MongoClient } from './database/mongo'
 import authRouter from './routes/auth'
 import usersRoute from './routes/users'
 import productsRouter from './routes/products'
+import todoRouter from './routes/todo'
+
 import { requestInterceptor } from './utils/requestInterceptor'
 
 const main = async () => {
@@ -28,6 +30,7 @@ const main = async () => {
 	app.use('/api', authRouter)
 	app.use('/api', usersRoute)
 	app.use('/api', productsRouter)
+    app.use('/api', todoRouter)
 
 	app.use('/', (_, res: Response) => {
 		res.status(200).json({ message: '💻 🏃 server is running' })
