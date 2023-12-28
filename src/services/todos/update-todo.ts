@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UpdateTodoController } from "../../controllers/todos/update-todo/update-todo-controller";
-import { MongoUpdateTodoRepository } from "../../repositories/todos/updata-todo/mongo-updata-todo";
+import { MongoUpdateTodoRepository } from "../../repositories/todos/update-todo/mongo-update-todo";
 
 export const UpdateTodo = async (req: Request, res: Response) => {
     const mongoUpdateUserRepository = new MongoUpdateTodoRepository()
