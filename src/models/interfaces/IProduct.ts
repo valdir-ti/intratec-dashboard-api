@@ -3,6 +3,7 @@ export interface IProduct {
 	description: string
 	price: number
 	stock: number
+    size: number
 	category: string
 	isActive: boolean
 	createdAt: string

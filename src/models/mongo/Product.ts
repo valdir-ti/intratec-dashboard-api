@@ -16,6 +16,9 @@ const productSchema = new mongoose.Schema<IProduct>(
 		stock: {
 			type: Number,
 		},
+        size: {
+			type: Number,
+		},
 		category: {
 			type: String,
 		},
