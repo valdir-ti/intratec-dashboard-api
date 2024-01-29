@@ -1,6 +1,6 @@
 {
 	"engines": {
-		"node": ">=19.0.1"
+		"node": "18.x"
 	},
 	"name": "intratec-dashboard-server",
 	"version": "1.0.0",
