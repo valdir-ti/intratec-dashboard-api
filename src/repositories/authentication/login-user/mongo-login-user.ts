@@ -19,19 +19,24 @@ export class MongoLoginUserRepository implements ILoginUserRepository {
 		if (dbUser) {
 			const match = await bcrypt.compare(password, dbUser.password || '')
 
-			const { _id, name, email } = dbUser
+			const { _id, name, email, img } = dbUser
 
 			if (!match) {
 				throw new Error('Username or password is incorrect')
 			}
 
 			const token = jwt.sign(
-				{ _id: dbUser._id, name: dbUser.name, email: dbUser.email },
+				{
+					_id,
+					name,
+					email,
+					img,
+				},
 				process.env.JWT_LOGIN_TOKEN || '',
 				{ expiresIn: '1D' },
 			)
 
-			return { user: { _id, name, email }, token }
+			return { user: { _id, name, email, img }, token }
 		}
 	}
 }
