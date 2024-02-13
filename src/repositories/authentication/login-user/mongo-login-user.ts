@@ -19,7 +19,7 @@ export class MongoLoginUserRepository implements ILoginUserRepository {
 		if (dbUser) {
 			const match = await bcrypt.compare(password, dbUser.password || '')
 
-			const { _id, name, email, img } = dbUser
+			const { _id, name, email, image } = dbUser
 
 			if (!match) {
 				throw new Error('Username or password is incorrect')
@@ -30,13 +30,13 @@ export class MongoLoginUserRepository implements ILoginUserRepository {
 					_id,
 					name,
 					email,
-					img,
+					image,
 				},
 				process.env.JWT_LOGIN_TOKEN || '',
 				{ expiresIn: '1D' },
 			)
 
-			return { user: { _id, name, email, img }, token }
+			return { user: { _id, name, email, image }, token }
 		}
 	}
 }

@@ -4,7 +4,7 @@ export interface IUser {
 	password?: string
 	isAdmin: boolean
 	isActive: boolean
-	img: string
+	image: string
 	createdAt: string
 	phone: string
 	address: string
