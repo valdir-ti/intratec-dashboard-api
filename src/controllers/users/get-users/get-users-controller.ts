@@ -1,14 +1,17 @@
 import { IUser } from '../../../models/interfaces/IUser'
 import { ok, serverError } from '../../helpers'
-import { HttpResponse, IController } from '../../protocols'
-import { IGetUsersRepository } from './protocols'
+import { HttpRequest, HttpResponse, IController } from '../../protocols'
+import { GetUsersParams, IGetUsersRepository } from './protocols'
 
 export class GetUsersController implements IController {
 	constructor(private readonly getUsersRepository: IGetUsersRepository) {}
 
-	async handle(): Promise<HttpResponse<IUser[] | string>> {
+	async handle(httpRequest: HttpRequest<GetUsersParams>): Promise<HttpResponse<IUser[] | string>> {
+
+        const q = httpRequest?.params
+
 		try {
-			const users = await this.getUsersRepository.getUsers()
+			const users = await this.getUsersRepository.getUsers(q)
 			return ok<IUser[]>(users)
 		} catch (error) {
 			return serverError()
