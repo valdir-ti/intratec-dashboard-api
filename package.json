@@ -10,7 +10,7 @@
 		"dev": "nodemon",
 		"start": "node ./dist/server.js",
 		"build": "tsc",
-        "vercel": "npm run build && vercel"
+        "vercel": "npm run build && vercel --prod"
 	},
 	"keywords": [],
 	"author": "",
