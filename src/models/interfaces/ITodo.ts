@@ -3,3 +3,9 @@ export interface ITodo {
 	done: boolean
 	createdAt: string
 }
+
+
+export interface ITodoResponse {
+	todos: ITodo[]
+    count: number
+}
