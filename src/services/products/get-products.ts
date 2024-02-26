@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { MongoGetProductsRepository } from '../../repositories/products/get-products/mongo-get-products'
 import { GetProductsController } from '../../controllers/products/get-products/get-products-controller'
+import { MongoGetProductsRepository } from '../../repositories/products/get-products/mongo-get-products'
 
 export const GetProducts = async (req: Request, res: Response) => {
 	const mongoGetProductsRepository = new MongoGetProductsRepository()
@@ -8,7 +8,9 @@ export const GetProducts = async (req: Request, res: Response) => {
 		mongoGetProductsRepository,
 	)
 
-	const { body, statusCode } = await getProductsController.handle()
+	const { body, statusCode } = await getProductsController.handle({
+		params: req.query,
+	})
 
 	res.status(statusCode).json(body)
 }

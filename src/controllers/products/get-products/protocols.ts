@@ -1,5 +1,9 @@
 import { IProduct } from 'src/models/interfaces/IProduct'
 
+export interface GetProductsParams {
+	q: string
+}
+
 export interface IGetProductsRepository {
-	getProducts(): Promise<IProduct[]>
+	getProducts(params: GetProductsParams): Promise<IProduct[]>
 }
