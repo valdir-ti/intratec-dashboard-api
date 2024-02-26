@@ -1,5 +1,9 @@
-import { ITodo } from "../../../models/interfaces/ITodo";
+import { ITodo } from '../../../models/interfaces/ITodo'
+
+export interface GetTodosParams {
+	q: string
+}
 
 export interface IGetTodosRepository {
-    getTodos(): Promise<ITodo[]>
+	getTodos(params: GetTodosParams): Promise<ITodo[]>
 }
