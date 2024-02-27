@@ -1,17 +1,25 @@
 import Todo from '../../../models/mongo/Todo'
-import { ITodo } from '../../../models/interfaces/ITodo'
 import {
 	GetTodosParams,
 	IGetTodosRepository,
 } from '../../../controllers/todos/get-todos/protocols'
+import { ITodoResponse } from '../../../models/interfaces/ITodo'
 
 export class MongoGetTodosRepository implements IGetTodosRepository {
-	async getTodos(params: GetTodosParams): Promise<ITodo[]> {
+	async getTodos(params: GetTodosParams): Promise<ITodoResponse> {
 		const q = params.q
+		const page = params.page
+		const ITEMS_PER_PAGE = 5
+
 		const regex = new RegExp(q, 'i')
+		const count = await Todo.find({
+			description: { $regex: regex },
+		}).count()
 		const todos = await Todo.find({ description: { $regex: regex } })
+			.limit(ITEMS_PER_PAGE)
+			.skip(ITEMS_PER_PAGE * (parseInt(page) - 1))
 			.select('description done createdAt')
 			.exec()
-		return todos
+		return { count, todos }
 	}
 }

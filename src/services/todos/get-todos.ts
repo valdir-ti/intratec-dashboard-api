@@ -5,7 +5,6 @@ import { MongoGetTodosRepository } from '../../repositories/todos/get-todos/mong
 export const GetTodos = async (req: Request, res: Response) => {
 	const mongoGetTodosRepository = new MongoGetTodosRepository()
 	const getTodosController = new GetTodosController(mongoGetTodosRepository)
-
 	const { body, statusCode } = await getTodosController.handle({
 		params: req.query,
 	})
