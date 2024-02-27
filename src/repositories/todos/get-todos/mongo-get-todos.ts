@@ -8,16 +8,18 @@ import { ITodoResponse } from '../../../models/interfaces/ITodo'
 export class MongoGetTodosRepository implements IGetTodosRepository {
 	async getTodos(params: GetTodosParams): Promise<ITodoResponse> {
 		const q = params.q
-        const page = params.page
-        const itemsPerPage = params.itemsPerPage
-
-        console.log('get todos api => ', {q, page, itemsPerPage})
+		const page = params.page
+		const ITEMS_PER_PAGE = 5
 
 		const regex = new RegExp(q, 'i')
-        const count = await Todo.find({ description: { $regex: regex } }).count()
-		const todos = await Todo.find({ description: { $regex: regex } }).limit(parseInt(itemsPerPage)).skip(parseInt(itemsPerPage) * (parseInt(page) - 1))
+		const count = await Todo.find({
+			description: { $regex: regex },
+		}).count()
+		const todos = await Todo.find({ description: { $regex: regex } })
+			.limit(ITEMS_PER_PAGE)
+			.skip(ITEMS_PER_PAGE * (parseInt(page) - 1))
 			.select('description done createdAt')
 			.exec()
-		return {count, todos}
+		return { count, todos }
 	}
 }

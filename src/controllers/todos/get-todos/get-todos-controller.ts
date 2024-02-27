@@ -13,10 +13,9 @@ export class GetTodosController implements IController {
 	async handle(
 		httpRequest: HttpRequest<GetTodosParams>,
 	): Promise<HttpResponse<ITodo[] | string>> {
-		const {q, page, itemsPerPage} = httpRequest.params
-        console.log('api handle => ', { q, page, itemsPerPage })
+		const { q, page } = httpRequest.params
 		try {
-			const todos = await this.getTodosRepository.getTodos({q, page, itemsPerPage})
+			const todos = await this.getTodosRepository.getTodos({ q, page })
 			return ok<ITodo[]>(todos)
 		} catch (error) {
 			return serverError()

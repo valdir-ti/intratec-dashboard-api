@@ -2,8 +2,7 @@ import { ITodoResponse } from '../../../models/interfaces/ITodo'
 
 export interface GetTodosParams {
 	q: string
-    page: string
-    itemsPerPage: string
+	page: string
 }
 
 export interface IGetTodosRepository {
