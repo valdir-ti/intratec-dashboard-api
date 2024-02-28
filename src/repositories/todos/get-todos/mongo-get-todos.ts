@@ -15,11 +15,11 @@ export class MongoGetTodosRepository implements IGetTodosRepository {
 		const count = await Todo.find({
 			description: { $regex: regex },
 		}).count()
-		const todos = await Todo.find({ description: { $regex: regex } })
+		const data = await Todo.find({ description: { $regex: regex } })
 			.limit(ITEMS_PER_PAGE)
 			.skip(ITEMS_PER_PAGE * (parseInt(page) - 1))
 			.select('description done createdAt')
 			.exec()
-		return { count, todos }
+		return { count, data }
 	}
 }

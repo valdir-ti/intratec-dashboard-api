@@ -11,6 +11,6 @@ export interface IProduct {
 }
 
 export interface IProductResponse {
-	products: IProduct[]
+	data: IProduct[]
 	count: number
 }

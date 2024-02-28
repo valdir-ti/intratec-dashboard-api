@@ -4,8 +4,7 @@ export interface ITodo {
 	createdAt: string
 }
 
-
 export interface ITodoResponse {
-	todos: ITodo[]
-    count: number
+	data: ITodo[]
+	count: number
 }

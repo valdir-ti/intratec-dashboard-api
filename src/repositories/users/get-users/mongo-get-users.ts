@@ -15,12 +15,12 @@ export class MongoGetUsersRepository implements IGetUsersRepository {
 		const count = await User.find({
 			name: { $regex: regex },
 		}).count()
-		const users = await User.find({ name: { $regex: regex } })
+		const data = await User.find({ name: { $regex: regex } })
 			.limit(ITEMS_PER_PAGE)
 			.skip(ITEMS_PER_PAGE * (parseInt(page) - 1))
 			.select('name email image isAdmin isActive createdAt')
 			.exec()
 
-		return { count, users }
+		return { count, data }
 	}
 }

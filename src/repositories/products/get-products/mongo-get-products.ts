@@ -15,7 +15,7 @@ export class MongoGetProductsRepository implements IGetProductsRepository {
 		const count = await Product.find({
 			title: { $regex: regex },
 		}).count()
-		const products = await Product.find({ title: { $regex: regex } })
+		const data = await Product.find({ title: { $regex: regex } })
 			.limit(ITEMS_PER_PAGE)
 			.skip(ITEMS_PER_PAGE * (parseFloat(page) - 1))
 			.select(
@@ -23,6 +23,6 @@ export class MongoGetProductsRepository implements IGetProductsRepository {
 			)
 			.exec()
 
-		return { count, products }
+		return { count, data }
 	}
 }
