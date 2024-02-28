@@ -3,13 +3,13 @@ import {
 	GetTodosParams,
 	IGetTodosRepository,
 } from '../../../controllers/todos/get-todos/protocols'
+import { ITEMS_PER_PAGE } from '../../../utils/itemsPerPage'
 import { ITodoResponse } from '../../../models/interfaces/ITodo'
 
 export class MongoGetTodosRepository implements IGetTodosRepository {
 	async getTodos(params: GetTodosParams): Promise<ITodoResponse> {
 		const q = params.q
 		const page = params.page
-		const ITEMS_PER_PAGE = 5
 
 		const regex = new RegExp(q, 'i')
 		const count = await Todo.find({

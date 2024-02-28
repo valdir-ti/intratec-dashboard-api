@@ -3,13 +3,13 @@ import {
 	GetProductsParams,
 	IGetProductsRepository,
 } from '../../../controllers/products/get-products/protocols'
+import { ITEMS_PER_PAGE } from '../../../utils/itemsPerPage'
 import { IProductResponse } from '../../../models/interfaces/IProduct'
 
 export class MongoGetProductsRepository implements IGetProductsRepository {
 	async getProducts(params: GetProductsParams): Promise<IProductResponse> {
 		const q = params.q
 		const page = params.page
-		const ITEMS_PER_PAGE = 5
 
 		const regex = new RegExp(q, 'i')
 		const count = await Product.find({

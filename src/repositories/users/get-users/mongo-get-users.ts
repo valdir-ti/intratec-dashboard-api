@@ -1,15 +1,15 @@
+import User from '../../../models/mongo/User'
 import {
 	GetUsersParams,
 	IGetUsersRepository,
 } from '../../../controllers/users/get-users/protocols'
-import User from '../../../models/mongo/User'
+import { ITEMS_PER_PAGE } from '../../../utils/itemsPerPage'
 import { IUserResponse } from '../../../models/interfaces/IUser'
 
 export class MongoGetUsersRepository implements IGetUsersRepository {
 	async getUsers(params: GetUsersParams): Promise<IUserResponse> {
 		const q = params.q
 		const page = params.page
-		const ITEMS_PER_PAGE = 5
 
 		const regex = new RegExp(q, 'i')
 		const count = await User.find({
