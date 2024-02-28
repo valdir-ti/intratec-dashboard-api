@@ -9,10 +9,10 @@ export class GetUsersController implements IController {
 	async handle(
 		httpRequest: HttpRequest<GetUsersParams>,
 	): Promise<HttpResponse<IUser[] | string>> {
-		const q = httpRequest?.params
+		const { q, page } = httpRequest.params
 
 		try {
-			const users = await this.getUsersRepository.getUsers(q)
+			const users = await this.getUsersRepository.getUsers({ q, page })
 			return ok<IUser[]>(users)
 		} catch (error) {
 			return serverError()

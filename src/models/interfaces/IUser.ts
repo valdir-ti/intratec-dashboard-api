@@ -9,3 +9,8 @@ export interface IUser {
 	phone: string
 	address: string
 }
+
+export interface IUserResponse {
+	users: IUser[]
+	count: number
+}

@@ -1,9 +1,10 @@
-import { IUser } from '../../../models/interfaces/IUser'
+import { IUserResponse } from '../../../models/interfaces/IUser'
 
 export interface GetUsersParams {
-    q: string
+	q: string
+	page: string
 }
 
 export interface IGetUsersRepository {
-	getUsers(params: GetUsersParams): Promise<IUser[]>
+	getUsers(params: GetUsersParams): Promise<IUserResponse>
 }
