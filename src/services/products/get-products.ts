@@ -7,10 +7,8 @@ export const GetProducts = async (req: Request, res: Response) => {
 	const getProductsController = new GetProductsController(
 		mongoGetProductsRepository,
 	)
-
 	const { body, statusCode } = await getProductsController.handle({
 		params: req.query,
 	})
-
 	res.status(statusCode).json(body)
 }

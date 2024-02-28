@@ -11,9 +11,12 @@ export class GetProductsController implements IController {
 	async handle(
 		httpRequest: HttpRequest<GetProductsParams>,
 	): Promise<HttpResponse<IProduct[] | string>> {
-		const q = httpRequest.params
+		const { q, page } = httpRequest.params
 		try {
-			const products = await this.getProductsRepository.getProducts(q)
+			const products = await this.getProductsRepository.getProducts({
+				q,
+				page,
+			})
 			return ok<IProduct[]>(products)
 		} catch (error) {
 			return serverError()
