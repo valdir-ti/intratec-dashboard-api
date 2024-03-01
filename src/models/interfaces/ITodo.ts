@@ -7,4 +7,6 @@ export interface ITodo {
 export interface ITodoResponse {
 	data: ITodo[]
 	count: number
+    totalDone: number
+    totalOpen: number
 }
