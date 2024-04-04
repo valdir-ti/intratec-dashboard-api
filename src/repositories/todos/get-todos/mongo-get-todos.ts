@@ -3,7 +3,7 @@ import {
 	GetTodosParams,
 	IGetTodosRepository,
 } from '../../../controllers/todos/get-todos/protocols'
-import { ITEMS_PER_PAGE } from '../../../utils/itemsPerPage'
+import { TODOS_PER_PAGE } from '../../../utils/itemsPerPage'
 import { ITodoResponse } from '../../../models/interfaces/ITodo'
 
 export class MongoGetTodosRepository implements IGetTodosRepository {
@@ -14,16 +14,16 @@ export class MongoGetTodosRepository implements IGetTodosRepository {
 		const regex = new RegExp(q, 'i')
 		const count = await Todo.find({
 			description: { $regex: regex },
-		}).count()
+		}).countDocuments({})
         const totalDone = await Todo.find({
 			done: true,
-		}).count()
+		}).countDocuments({})
         const totalOpen = await Todo.find({
 			done: false,
-		}).count()
+		}).countDocuments({})
 		const data = await Todo.find({ description: { $regex: regex } })
-			.limit(ITEMS_PER_PAGE)
-			.skip(ITEMS_PER_PAGE * (parseInt(page) - 1))
+			.limit(TODOS_PER_PAGE)
+			.skip(TODOS_PER_PAGE * (parseInt(page) - 1))
 			.select('description done createdAt')
 			.exec()
 		return { count, totalDone, totalOpen, data }

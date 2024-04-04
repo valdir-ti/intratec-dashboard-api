@@ -14,7 +14,7 @@ export class MongoGetProductsRepository implements IGetProductsRepository {
 		const regex = new RegExp(q, 'i')
 		const count = await Product.find({
 			title: { $regex: regex },
-		}).count()
+		}).countDocuments({})
 		const data = await Product.find({ title: { $regex: regex } })
 			.limit(ITEMS_PER_PAGE)
 			.skip(ITEMS_PER_PAGE * (parseFloat(page) - 1))

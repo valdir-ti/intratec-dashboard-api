@@ -14,7 +14,7 @@ export class MongoGetUsersRepository implements IGetUsersRepository {
 		const regex = new RegExp(q, 'i')
 		const count = await User.find({
 			name: { $regex: regex },
-		}).count()
+		}).countDocuments({})
 		const data = await User.find({ name: { $regex: regex } })
 			.limit(ITEMS_PER_PAGE)
 			.skip(ITEMS_PER_PAGE * (parseInt(page) - 1))
