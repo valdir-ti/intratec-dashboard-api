@@ -12,9 +12,7 @@ export class MongoGetTodosRepository implements IGetTodosRepository {
 		const page = params.page
         const order = !params.order || params.order === 'desc' ? -1 : 1
 
-        console.log('order => ', params.order, order)
-
-		const regex = new RegExp(q, 'i')
+        const regex = new RegExp(q, 'i')
 		const count = await Todo.find({
 			description: { $regex: regex },
 		}).countDocuments({})
@@ -27,7 +25,7 @@ export class MongoGetTodosRepository implements IGetTodosRepository {
 		const data = await Todo.find({ description: { $regex: regex } })
 			.limit(TODOS_PER_PAGE)
 			.skip(TODOS_PER_PAGE * (parseInt(page) - 1))
-			.select('description done createdAt')
+			.select('title description done createdAt')
             .sort({ createdAt: order })
             .exec()
 		return { count, totalDone, totalOpen, data }

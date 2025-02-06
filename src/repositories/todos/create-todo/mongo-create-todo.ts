@@ -6,9 +6,9 @@ export class MongoCreateTodoRepository implements ICreateTodoRepository {
 
     async createTodo(params: CreateTodoParams): Promise<ITodo> {
 
-        const { description } = params
+        const { title, description } = params
 
-        const todoCreated = await Todo.create({ description })
+        const todoCreated = await Todo.create({ title, description })
 
         if(!todoCreated) throw new Error('Todo not created')
 

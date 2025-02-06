@@ -6,7 +6,7 @@ export class MongoUpdateTodoRepository implements IUpdateTodoRepository {
     async updateTodo(id: string): Promise<ITodo> {
         const filter = { _id: id }
         const params = { done: true }
-        const todoUpdated = await Todo.findOneAndUpdate(filter, params, { new: true }).select('description done createdAt')
+        const todoUpdated = await Todo.findOneAndUpdate(filter, params, { new: true }).select('title description done createdAt')
         if (!todoUpdated) throw new Error('todo not updated')
 
 		return todoUpdated
