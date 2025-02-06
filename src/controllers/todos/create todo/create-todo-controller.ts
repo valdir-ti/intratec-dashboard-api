@@ -15,7 +15,11 @@ export class CreateTodoController implements IController {
 				return badRequest('Please specify a body')
 			}
 
-            const { description } = body
+            const { title, description } = body
+
+            if (!title) {
+				return badRequest('Please specify a title field')
+			}
 
             if (!description) {
 				return badRequest('Please specify a description field')
